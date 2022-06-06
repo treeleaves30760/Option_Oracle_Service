@@ -1,0 +1,25 @@
+{
+  "name": "chain-orcale",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src"
+  },
+  "type": "module",
+  "author": "Hsu Po Hsiang",
+  "license": "ISC",
+  "dependencies": {
+    "@truffle/contract": "^4.5.13",
+    "@truffle/hdwallet-provider": "^2.0.8",
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
+    "fs": "^0.0.1-security",
+    "moralis": "^1.8.0",
+    "node-fetch": "^3.2.4",
+    "request": "^2.88.2",
+    "request-promise-native": "^1.0.9",
+    "truffle": "^5.5.17",
+    "web3": "^1.7.3"
+  }
+}
