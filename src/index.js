@@ -3,7 +3,7 @@ import { getOptionPrice } from "./getPrice.js";
 import { contract, OracleAddress, web3 } from "./eth.js";
 
 var times = 0;
-var NowJobId = 0;
+var NowJobId = -1;
 
 async function setup() {
     console.log(OracleAddress)
@@ -37,14 +37,15 @@ function start() {
             getOptionPrice(coin, date, price, buytype).then((result) => {
                 return result.data[0]
             }).then((OptionData) => {
-                console.log(JobId,
-                    (parseInt(OptionData.open * 10000)),
-                    (parseInt(OptionData.lastPrice * 10000)),
-                    (parseInt(OptionData.high * 10000)),
-                    (parseInt(OptionData.low * 10000)),
-                    OptionData.openTime.toString(),
-                    OptionData.closeTime.toString(),
-                    OptionData.symbol)
+                console.log("JobId: ", JobId,
+                    " open:" , (parseInt(OptionData.open * 10000)),
+                    " lastPrice:", (parseInt(OptionData.lastPrice * 10000)),
+                    " high:", (parseInt(OptionData.high * 10000)),
+                    " low:", (parseInt(OptionData.low * 10000)))
+                console.log("openTime: ", OptionData.openTime.toString())
+                console.log("closeTime:", OptionData.closeTime.toString())
+                console.log("symbol:   ", OptionData.symbol);
+                
                 contract.methods.updateOptionPrice(
                     JobId,
                     (parseInt(OptionData.open * 10000)),
@@ -66,7 +67,7 @@ function start() {
         // console.log('receipt', receipt);
         restart();
     })
-    console.log("Times: ", times++);
+    console.log("Times: ", times++, "time: ", Date.now());
     restart();
 }
 
@@ -86,9 +87,5 @@ async function main() {
     await setup();
     start();
 }
-// getOptionPrice("BTC", "220610", 32000, "C").then((res) => {
-//     console.log(res.data);
-// })
 
 main();
-// getRevertReason("0x5a9b5631c9a065a93a82355cfb6d6f5d8ccb3a73000d2153fd15a5aa9995148a").then(console.log)
